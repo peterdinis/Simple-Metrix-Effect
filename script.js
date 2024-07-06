@@ -24,7 +24,7 @@ function drawLetter() {
         const text = letters[Math.floor(Math.random() * letters.length)];
         context.fillText(text, i * fontSize, drops[i] * fontSize);
 
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.175) {
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.075) {
             drops[i] = 0;
         }
 
