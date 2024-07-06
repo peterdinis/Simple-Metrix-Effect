@@ -13,7 +13,7 @@ for (let x = 0; x < columns; x++) {
     drops[x] = Math.floor(Math.random() * canvas.height / fontSize);
 }
 
-function draw() {
+function drawLetter() {
     context.fillStyle = 'rgba(0, 0, 0, 0.05)';
     context.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -24,7 +24,7 @@ function draw() {
         const text = letters[Math.floor(Math.random() * letters.length)];
         context.fillText(text, i * fontSize, drops[i] * fontSize);
 
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.175) {
             drops[i] = 0;
         }
 
@@ -32,7 +32,7 @@ function draw() {
     }
 }
 
-setInterval(draw, 33);
+setInterval(drawLetter, 33);
 
 window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
