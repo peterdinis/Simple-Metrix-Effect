@@ -1,17 +1,16 @@
 const canvas = document.getElementById('matrix');
 const context = canvas.getContext('2d');
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function setCanvasSize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+setCanvasSize();
 
 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
 const fontSize = 16;
-const columns = Math.floor(canvas.width / fontSize);
-
-const drops = [];
-for (let x = 0; x < columns; x++) {
-    drops[x] = Math.floor(Math.random() * canvas.height / fontSize);
-}
+let columns = Math.floor(canvas.width / fontSize);
+const drops = Array(columns).fill(0).map(() => Math.floor(Math.random() * canvas.height / fontSize));
 
 function drawLetter() {
     context.fillStyle = 'rgba(0, 0, 0, 0.05)';
@@ -20,7 +19,7 @@ function drawLetter() {
     context.fillStyle = '#0F0';
     context.font = `${fontSize}px monospace`;
 
-    for (let i = 0; i < drops.length; i++) {
+    for (let i = 0; i < columns; i++) {
         const text = letters[Math.floor(Math.random() * letters.length)];
         context.fillText(text, i * fontSize, drops[i] * fontSize);
 
@@ -35,9 +34,9 @@ function drawLetter() {
 setInterval(drawLetter, 33);
 
 window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    drops.length = 0;
+    setCanvasSize();
+    columns = Math.floor(canvas.width / fontSize);
+    drops.length = columns;
     for (let x = 0; x < columns; x++) {
         drops[x] = Math.floor(Math.random() * canvas.height / fontSize);
     }
